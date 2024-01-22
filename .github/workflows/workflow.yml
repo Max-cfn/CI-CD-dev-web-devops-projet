@@ -33,4 +33,8 @@ jobs:
       run: |
         pip freeze
         python -m pytest --version
+
+    - name: Lancement des tests
+      run: |
+        python -m pytest tests/
       
