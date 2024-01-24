@@ -5,7 +5,6 @@ on:
   push:
     branches: [ "main" ]
 
-
   workflow_dispatch:
 
 jobs:
@@ -37,17 +36,12 @@ jobs:
     - name: Lancement des tests
       run: |
         python -m pytest tests/
-    
+
     - name: Set up Ansible
       run: |
         sudo apt-get update
         sudo apt-get install -y ansible
-    
-    - name : Tester une connexion ssh avec une commande whoami sans ansible
+
+    - name: Test SSH connection to Azure VM
       run: |
-        ssh -i id_rsa azureuser@20.229.113.62
-    
-    - name: Deploy to Azure VM
-      run: |
-        ansible-playbook -i inventory.ini deploy.yaml --private-key id_rsa 
-      
+        ansible -i "20.229.113.62," -u azureuser --ssh-extra-args="-o StrictHostKeyChecking=no" -m ping
