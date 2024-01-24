@@ -1,6 +1,6 @@
 - name: Envoie du fichier .py avec le miniserveur Flask
   hosts: devops-Project
-  become: azureuser
+  become_user: azureuser
   tasks:
     - name: Copier le fichier app.py
       synchronize:
