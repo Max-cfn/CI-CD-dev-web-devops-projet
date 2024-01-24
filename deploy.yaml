@@ -1,11 +1,9 @@
----
-- name: Deploy to Azure VM
-  hosts: azure_vms
-  become: yes
-  become_user: azureuser
+- name: Envoie du fichier .py avec le miniserveur Flask
+  hosts: devops-Project
+  become: true
   tasks:
-    - name: Envoie du fichier .py avec le miniserveur Flask
-      ansible.builtin.synchronize:
-        src: app.py
-        dest: /home/azureuser/
-        mode: pull
+    - name: Copier le fichier app.py
+      synchronize:
+        src: ./app.py
+        dest: /home/azureuser/app.py
+      become_user: azureuser
