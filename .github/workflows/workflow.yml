@@ -37,11 +37,7 @@ jobs:
       run: |
         python -m pytest tests/
 
-    - name: Set up Ansible
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y ansible
-
+    # Nouvelle étape pour tester la connexion SSH
     - name: Test SSH connection to Azure VM
       run: |
-        ansible -i "20.229.113.62," -u azureuser --ssh-extra-args="-o StrictHostKeyChecking=no" -m ping
+        ssh -o StrictHostKeyChecking=no azureuser@20.229.113.62 echo "SSH connection successful"
