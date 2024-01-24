@@ -52,6 +52,6 @@ jobs:
     
     - name: Lancement du playbook Ansible
       run: |
-        ansible-playbook -i inventory.yml playbook.yml --private-key ssh_key.pem
+        ansible-playbook -i inventory.ini deploy.yaml --private-key ssh_key.pem
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
