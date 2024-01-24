@@ -64,3 +64,9 @@ jobs:
       run: |
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         docker push blyoooo/devops-project:latest
+    
+    - name: Déploiement de l'image sur la VM azure
+      run: |
+        ssh -i ssh_key.pem -o StrictHostKeyChecking=no azureuser@20.229.113.62 docker pull blyoooo/devops-project:latest
+        ssh -i ssh_key.pem -o StrictHostKeyChecking=no azureuser@20.229.113.62 docker run -d -p 80:80 blyoooo/devops-project:latest
+        
