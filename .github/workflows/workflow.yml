@@ -58,4 +58,9 @@ jobs:
     
     - name: Construction de l'image Docker
       run: |
-        docker build -t docker-devops-app .
+        docker build -t blyoooo/devops-project:latest .
+
+    - name: Envoie de l'image sur dockerhub
+      run: |
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker push blyoooo/devops-project:latest
