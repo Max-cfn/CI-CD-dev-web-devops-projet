@@ -37,7 +37,10 @@ jobs:
       run: |
         python -m pytest tests/
 
-    # Nouvelle étape pour tester la connexion SSH
-    - name: Test SSH connection to Azure VM
+   - name: Test SSH connection to Azure VM
       run: |
-        ssh -o StrictHostKeyChecking=no azureuser@20.229.113.62 echo "SSH connection successful"
+        echo "$SSH_PRIVATE_KEY" > ssh_key.pem
+        chmod 600 ssh_key.pem
+        ssh -i ssh_key.pem -o StrictHostKeyChecking=no azureuser@20.229.113.62 echo "SSH connection successful"
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
