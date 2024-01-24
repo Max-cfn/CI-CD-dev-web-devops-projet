@@ -37,7 +37,7 @@ jobs:
       run: |
         python -m pytest tests/
 
-    - name: Test SSH connection to Azure VM
+    - name: Test connexion SSH sur la VM azure
       run: |
         echo "$SSH_PRIVATE_KEY" > ssh_key.pem
         chmod 600 ssh_key.pem
@@ -55,3 +55,7 @@ jobs:
         ansible-playbook -i inventory.ini deploy.yaml --private-key ssh_key.pem
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+    
+    - name: Construction de l'image Docker
+      run: |
+        docker build -t docker-devops-app .
