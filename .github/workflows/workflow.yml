@@ -68,5 +68,4 @@ jobs:
     - name: Déploiement de l'image sur la VM azure
       run: |
         ssh -i ssh_key.pem -o StrictHostKeyChecking=no azureuser@20.229.113.62 docker pull blyoooo/devops-project:latest
-        ssh -i ssh_key.pem -o StrictHostKeyChecking=no azureuser@20.229.113.62 docker run -d -p 80:80 blyoooo/devops-project:latest
-        
+        ssh -i ssh_key.pem -o StrictHostKeyChecking=no azureuser@20.229.113.62 docker run -d -p 80:5000 blyoooo/devops-project:latest
