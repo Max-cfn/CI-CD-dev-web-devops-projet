@@ -42,8 +42,9 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y ansible
+    
 
     - name: Deploy to Azure VM
       run: |
-        ansible-playbook -i inventory.ini deploy.yaml
+        ansible-playbook -i inventory.ini deploy.yaml --private-key id_rsa 
       
