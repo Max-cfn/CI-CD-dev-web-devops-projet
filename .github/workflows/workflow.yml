@@ -64,6 +64,11 @@ jobs:
       run: |
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         docker push blyoooo/devops-project:latest
+
+    - name : Arrêt et suppression des précédents containers (sécurité)
+      run: |
+        ssh -i ssh_key.pem -o StrictHostKeyChecking=no azureuser@20.229.113.62 docker stop $(docker ps -a -q)
+        ssh -i ssh_key.pem -o StrictHostKeyChecking=no azureuser@20.229.113.62 docker rm $(docker ps -a -q)
     
     - name: Déploiement de l'image sur la VM azure
       run: |
