@@ -43,6 +43,10 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y ansible
 
+    - name: Add SSH key to known_hosts
+      run: |
+        echo "20.229.113.62 $(ssh-keyscan -H 20.229.113.62)" >> ~/.ssh/known_hosts
+
     - name: Deploy to Azure VM
       run: |
         ansible-playbook -i inventory.ini deploy.yaml
