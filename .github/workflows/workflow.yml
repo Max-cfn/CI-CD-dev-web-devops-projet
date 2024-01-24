@@ -58,4 +58,4 @@ jobs:
     
     - name : Lance le programme python
       run : |
-        ssh -i -o StrictHostKeyChecking=no ssh_key.pem azureuser@20.229.113.62 python3 /home/azureuser/app.py
+        ssh -i ssh_key.pem -o StrictHostKeyChecking=no azureuser@20.229.113.62 python3 /home/azureuser/app.py
