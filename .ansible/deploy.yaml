@@ -6,6 +6,6 @@
   tasks:
     - name: Envoie du fichier .py avec le miniserveur Flask
       ansible.builtin.synchronize:
-        src: ./app/app.py
+        src: app.py
         dest: /home/azureuser/
         mode: pull
