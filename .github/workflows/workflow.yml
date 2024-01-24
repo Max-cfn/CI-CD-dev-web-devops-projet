@@ -55,17 +55,3 @@ jobs:
         ansible-playbook -i inventory.ini deploy.yaml --private-key ssh_key.pem
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-    
-    - name: Lancer le programme Python
-      run: |
-        ssh -i ssh_key.pem -o StrictHostKeyChecking=no azureuser@20.229.113.62 'python3 -m venv venv && source venv/bin/activate && pip install Flask && python3 /home/azureuser/app.py'
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-    
-    - name: Vérification du déploiement
-      run: |
-        ssh -i ssh_key.pem -o StrictHostKeyChecking=no azureuser@20.229.113.62 'curl localhost:5000'
-    
-    - name: arrêt du workflow
-      run: |
-        exit 1
