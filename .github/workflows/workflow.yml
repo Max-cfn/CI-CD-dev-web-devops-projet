@@ -41,7 +41,7 @@ jobs:
       run: |
         echo "$SSH_PRIVATE_KEY" > ssh_key.pem
         chmod 600 ssh_key.pem
-        ssh -i ssh_key.pem -o StrictHostKeyChecking=no azureuser@20.229.113.62 echo "SSH connection successful"
+        ssh -i ssh_key.pem -o StrictHostKeyChecking=no azureuser@${{ secrets.VM_IP }} echo "SSH connection successful"
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
@@ -67,17 +67,17 @@ jobs:
 
     - name: Arrêt et suppression des précédents containers (sécurité)
       run: |
-        running_containers=$(ssh -i ssh_key.pem -o StrictHostKeyChecking=no azureuser@20.229.113.62 docker ps -q)
+        running_containers=$(ssh -i ssh_key.pem -o StrictHostKeyChecking=no azureuser@${{ secrets.VM_IP }} docker ps -q)
         if [ -n "$running_containers" ]; then
-          ssh -i ssh_key.pem -o StrictHostKeyChecking=no azureuser@20.229.113.62 docker stop $running_containers
+          ssh -i ssh_key.pem -o StrictHostKeyChecking=no azureuser@${{ secrets.VM_IP }} docker stop $running_containers
         fi
-        stopped_containers=$(ssh -i ssh_key.pem -o StrictHostKeyChecking=no azureuser@20.229.113.62 docker ps -a -q)
+        stopped_containers=$(ssh -i ssh_key.pem -o StrictHostKeyChecking=no azureuser@${{ secrets.VM_IP }} docker ps -a -q)
         if [ -n "$stopped_containers" ]; then
-          ssh -i ssh_key.pem -o StrictHostKeyChecking=no azureuser@20.229.113.62 docker rm $stopped_containers
+          ssh -i ssh_key.pem -o StrictHostKeyChecking=no azureuser@${{ secrets.VM_IP }} docker rm $stopped_containers
         fi
 
     
     - name: Déploiement de l'image sur la VM azure
       run: |
-        ssh -i ssh_key.pem -o StrictHostKeyChecking=no azureuser@20.229.113.62 docker pull blyoooo/devops-project:latest
-        ssh -i ssh_key.pem -o StrictHostKeyChecking=no azureuser@20.229.113.62 docker run -d -p 80:5000 blyoooo/devops-project:latest
+        ssh -i ssh_key.pem -o StrictHostKeyChecking=no azureuser@${{ secrets.VM_IP }} docker pull blyoooo/devops-project:latest
+        ssh -i ssh_key.pem -o StrictHostKeyChecking=no azureuser@${{ secrets.VM_IP }} docker run -d -p 80:5000 blyoooo/devops-project:latest
