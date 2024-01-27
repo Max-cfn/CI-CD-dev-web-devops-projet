@@ -9,7 +9,7 @@ def home():
 
 @app.route('/about')
 def about():
-    return 'This is the about page.'
+    return 'This is the about page. Please contact us through mail'
 
 if __name__ == '__main__':
     app.run(debug=True)
