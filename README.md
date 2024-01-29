@@ -53,4 +53,4 @@ Comme dit précédement, Docker tournera sur la VM Azure configurée en amont.
 ---
 ### Bugs connus
 --- 
-- L'application n'est accessible que depuis l'intérieur du conteneur (au 25/01/24) --> Probablement un problème de mapping 
+- L'application n'est accessible que depuis l'intérieur du conteneur (au 25/01/24) --> Probablement un problème de mapping --> Problème résolu le 29/01/24
