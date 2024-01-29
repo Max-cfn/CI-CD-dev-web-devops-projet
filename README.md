@@ -25,7 +25,7 @@ Si la page est bien en ligne et que le texte affiché sur la page correspond à 
 
 En amont a été créée et configurée une VM sur Azure à l'aide de nos comptes EFREI. Il s'agit d'une VM Ubuntu classique, accessible en SSH via des clés.
 Elle a été configurée pour la suite du projet avec :
-- Installation de python, Flask, docker
+- Installation de python, docker
 - Configuration de clés SSH pour communiquer entre Actions et la machine
 
 Pour réaliser cette phase, nous avons suivi le déroulé suivant :
